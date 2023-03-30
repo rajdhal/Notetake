@@ -1,0 +1,19 @@
+.file-icon {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    margin-right: 8px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}
+
+.file-icon.doc {
+    background-image: url('/static/core/icons/doc.svg');
+}
+
+.file-icon.pdf {
+    background-image: url('/static/core/icons/pdf.svg');
+}
+
+/* Add more file type icons as needed */

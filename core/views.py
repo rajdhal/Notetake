@@ -1,0 +1,24 @@
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+from django.conf import settings
+from course.models import Course, File
+
+def index(request):
+    files = File.objects.all()[0:6]
+    courses = Course.objects.all()
+    return render(request, 'core/index.html',{
+       'courses': courses,
+       'files': files,
+    })
+
+def download_file(request, file_id):
+    file = get_object_or_404(File, pk=file_id)
+    file_path = file.file.path
+    with open(file_path, 'rb') as f:
+        response = HttpResponse(f.read())
+        response['Content-Disposition'] = 'attachment; filename=' + file.file.name.split('/')[-1]
+        response['Content-Type'] = 'application/octet-stream'
+        return response
+
+def contact(request):
+    return render(request, 'core/contact.html',)
