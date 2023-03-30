@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ file.name }}{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ file.name }}</h1>
+            </div>
+        </div>
+    </div>
+
+    <iframe src="{{ file.file.url }}" width="100%" height="800px"></iframe>
+    
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                
+                <p>{{ file.description }}</p>
+                
+                <p>Uploaded by {{ file.uploaded_by }} on {{ file.uploaded_at }}</p>
+            </div>
+
+            <a href="{% url 'download_file' file.id %}" class="text-lg text-blue-400 hover:text-blue-900">Download</a>
+        </div>
+    </div>
+
+{% endblock %}
