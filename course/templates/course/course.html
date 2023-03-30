@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{course.name}}{% endblock %}
+
+{% block content %}
+    <h1> {{course.name}} </h1>
+    
+    <div class="grid grid-cols-4 gap-3">
+        {% for file in course_files %}
+            <div class="bg-white shadow-md rounded-md p-3">
+                <h1 class="text-xl font-bold">{{file.name}}</h1>
+                <p class="text-gray-500">{{file.description}}</p>
+                <a href="{{file.file.url}}" class="text-blue-500">Download</a>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

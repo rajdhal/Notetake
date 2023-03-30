@@ -16,11 +16,13 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from core.views import index, contact, download_file
+
 
 urlpatterns = [
     path('', index, name='index'),
+    path('course/', include('course.urls')),
     path('contact/', contact, name='contact'),
     path('admin/', admin.site.urls),
     path('download/<int:file_id>/', download_file, name='download_file'),
