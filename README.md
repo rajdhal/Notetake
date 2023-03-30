@@ -1,0 +1,2 @@
+# Notetake
+Django app
