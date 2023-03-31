@@ -1,6 +1,9 @@
 from django.shortcuts import render
+
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
+
+from .forms import NewFileForm, NewCourseForm
 from .models import Course, File
 
 
@@ -21,3 +24,37 @@ def course(request, pk):
         'course_files': course_files
     })
     
+def newFile(request):
+    if request.method == 'POST':
+        form = NewFileForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            file = form.save(commit=False)
+            file.created_by = request.user #This is the user that is logged in, might need to remove this
+            file.save()
+            return redirect('course:file', pk=file.id)
+        else:
+            form = NewFileForm()
+    form = NewFileForm()
+    
+    return render(request, 'course/form.html', {
+        'form': form,
+        'title' : 'New File',
+    })
+
+def newCourse(request):
+    if request.method == 'POST':
+        form = NewCourseForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            course = form.save(commit=False)
+            course.save()
+            return redirect('course:course', pk=course.id)
+        else:
+            form = NewCourseForm()
+    form = NewCourseForm()
+    
+    return render(request, 'course/form.html', {
+        'form': form,
+        'title' : 'Add Course',
+    })
