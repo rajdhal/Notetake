@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -30,7 +30,7 @@ def newFile(request):
         
         if form.is_valid():
             file = form.save(commit=False)
-            file.created_by = request.user #This is the user that is logged in, might need to remove this
+            file.uploaded_by = request.user #This is the user that is logged in, might need to remove this
             file.save()
             return redirect('course:file', pk=file.id)
         else:
@@ -58,3 +58,10 @@ def newCourse(request):
         'form': form,
         'title' : 'Add Course',
     })
+
+
+@login_required
+def deleteFile(request, pk):
+    file = get_object_or_404(File, pk=pk)
+    file.delete()
+    return redirect('core:index')

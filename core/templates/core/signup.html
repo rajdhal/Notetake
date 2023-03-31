@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+    
+    <div class="w-1/2 my-6 p-6 mx-auto border border-gray-400 rounded-lg shadow-lg bg-gray-100">
+        <p>Sign up for a new account.</p>
+
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            <div class='mb-4'>
+                <label class='block text-gray-700 text-sm font-bold mb-2' for='username'>Username</label>
+            {{ form.username.errors }}
+            {{ form.username }}
+            </div>
+
+            <div class='mb-4'>
+                <label class='block text-gray-700 text-sm font-bold mb-2' for='email'>Email</label>
+            {{ form.email.errors }}
+            {{ form.email }}
+            </div>
+
+            <div class='mb-4'>
+                <label class='block text-gray-700 text-sm font-bold mb-2' for='password1'>Password</label>
+            {{ form.password1.errors }}
+            {{ form.password1 }}
+            </div>
+
+            <div class='mb-4'>
+                <label class='block text-gray-700 text-sm font-bold mb-2' for='password2'>Password (again)</label>
+            {{ form.password2.errors}}
+            {{ form.password2 }}
+            </div>
+
+            {% if form.errors or form.non_field_errors %}
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Oops!</strong>
+                    <span class="block sm:inline">There were some errors with your submission.</span>
+                </div>
+            {% endif %}
+
+
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Sign Up</button>
+        </form>
+
+    </div>
+{% endblock %}

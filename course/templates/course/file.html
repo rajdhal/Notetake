@@ -28,4 +28,14 @@
         </div>
     </div>
 
+    {% if file.uploaded_by == request.user or user.is_staff%}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{% url 'course:deleteFile' file.id %}" class="text-lg text-red-400 hover:text-red-900">Delete</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
 {% endblock %}
