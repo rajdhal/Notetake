@@ -18,6 +18,7 @@ class File(models.Model):
     file = models.FileField(upload_to='file_files/', blank=True, null=True)
     uploaded_by = models.ForeignKey(User, related_name='files', on_delete=models.SET_NULL, blank=True, null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
+    votes = models.IntegerField(default=0)
     
     def __str__(self):
         return self.name

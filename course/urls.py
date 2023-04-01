@@ -10,4 +10,6 @@ urlpatterns = [
     path('<int:pk>/', views.course, name='course'),
     path('file/<int:pk>/', views.file, name='file'),
     path('file/<int:pk>/delete/', views.deleteFile, name='deleteFile'),
+    path('file/<int:pk>/upvote/', views.upvote, name='upvote'),
+    path('file/<int:pk>/downvote/', views.downvote, name='downvote'),
 ]

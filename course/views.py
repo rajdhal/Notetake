@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 
+
 from .forms import NewFileForm, NewCourseForm
 from .models import Course, File
 
@@ -21,7 +22,7 @@ def course(request, pk):
     course_files = File.objects.filter(course=course)
     return render(request, 'course/course.html', {
         'course': course,
-        'course_files': course_files
+        'course_files': course_files.order_by('-votes')
     })
     
 def newFile(request):
@@ -65,3 +66,17 @@ def deleteFile(request, pk):
     file = get_object_or_404(File, pk=pk)
     file.delete()
     return redirect('core:index')
+
+@login_required
+def upvote(request, pk):
+    file = get_object_or_404(File, pk=pk)
+    file.votes += 1
+    file.save()
+    return redirect('course:file', pk=file.id)
+
+@login_required
+def downvote(request, pk):
+    file = get_object_or_404(File, pk=pk)
+    file.votes -= 1
+    file.save()
+    return redirect('course:file', pk=file.id)

@@ -14,7 +14,7 @@
 
     <iframe src="{{ file.file.url }}" width="100%" height="800px"></iframe>
     
-
+   
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -23,10 +23,22 @@
                 
                 <p>Uploaded by {{ file.uploaded_by }} on {{ file.uploaded_at }}</p>
             </div>
-
+            {% if user.is_authenticated %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="{% url 'course:downvote' file.id %}" class="text-lg text-red-400 hover:text-red-900">-1</a>
+                            <span class="text-lg"> | {{ file.votes }} | </span>
+                            <a href="{% url 'course:upvote' file.id %}" class="text-lg text-green-400 hover:text-green-900">+1</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <br>
             <a href="{% url 'download_file' file.id %}" class="text-lg text-blue-400 hover:text-blue-900">Download</a>
         </div>
     </div>
+
 
     {% if file.uploaded_by == request.user or user.is_staff%}
         <div class="container">
