@@ -10,14 +10,12 @@ Notetake is a Django-based web application that allows users to upload and share
   - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
 - User authentication: Users can create accounts and log in to the system.
 - Document upload: Users can upload class-specific documents.
 - Document download: Users can browse and download documents uploaded by others.
-- [Add more features here]
 
 ## Getting Started
 
@@ -25,9 +23,8 @@ Notetake is a Django-based web application that allows users to upload and share
 
 Make sure you have the following installed:
 
-- Python [version]
-- Django [version]
-- [Any other dependencies]
+- Python
+- Django
 
 ### Installation
 
