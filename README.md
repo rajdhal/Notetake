@@ -75,7 +75,6 @@ Make sure you have the following installed:
 2. Upload class-specific documents.
 3. Browse and download documents uploaded by others.
 
-
 ## Contributing
 
 Contributions are welcome! Please follow these guidelines:
