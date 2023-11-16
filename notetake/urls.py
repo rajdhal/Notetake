@@ -17,8 +17,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from core.views import index, contact, download_file
+from course.views import course, newFile, newCourse, file, deleteFile, FileViewSet
 
+
+router = DefaultRouter()
+router.register(r'files', FileViewSet, basename='file')
 
 urlpatterns = [
     path('', include('core.urls')),
@@ -26,4 +31,5 @@ urlpatterns = [
     path('contact/', contact, name='contact'),
     path('admin/', admin.site.urls),
     path('download/<int:file_id>/', download_file, name='download_file'),
+    path('api/', include(router.urls)),  # Include the DRF patterns for the FileViewSet
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 {% block title %}{{ file.name }}{% endblock %}
 
 {% block content %}
@@ -12,8 +12,14 @@
         </div>
     </div>
 
-    <iframe src="{{ file.file.url }}" width="100%" height="800px"></iframe>
     
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="pdf-canvas" style="border:1px solid black;"></canvas>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <div class="row">
@@ -38,4 +44,47 @@
         </div>
     {% endif %}
 
+    
+    <script type="module">
+        import * as pdfjsLib from '{% static 'pdfjs/build/pdf.mjs' %}';
+
+        // Replace 'your_pdf_url' with the actual URL of your PDF file
+        const pdfUrl = "{{ file.file.url }}";
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc = '{% static 'pdfjs/build/pdf.worker.mjs' %}';
+
+        const loadingTask = pdfjsLib.getDocument(pdfUrl);
+
+        loadingTask.promise.then((pdf) => {
+            console.log('PDF loaded');
+
+            const pageNumber = 1;
+            pdf.getPage(pageNumber).then((page) => {
+                console.log('Page loaded');
+
+                const scale = 1.5;
+                const viewport = page.getViewport({ scale });
+
+                // Prepare canvas using PDF page dimensions
+                const canvas = document.getElementById('pdf-canvas');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                // Render PDF page into canvas context
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+
+                const renderTask = page.render(renderContext);
+                renderTask.promise.then(() => {
+                    console.log('Page rendered');
+                });
+            });
+        }).catch((reason) => {
+            // PDF loading error
+            console.error(reason);
+        });
+    </script>
 {% endblock %}

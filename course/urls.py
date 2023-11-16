@@ -1,7 +1,10 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
+from django.urls import path, include
 from . import views
+from course.views import course, newFile, newCourse, file, deleteFile, FileViewSet
 
 app_name = 'course'
+
 
 urlpatterns = [
     path('', views.course, name='course'),

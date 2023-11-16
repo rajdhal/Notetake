@@ -5,6 +5,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from .forms import NewFileForm, NewCourseForm
 from .models import Course, File
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from .serializers import FileSerializer
 
 
 # Create your views here.
@@ -59,9 +63,29 @@ def newCourse(request):
         'title' : 'Add Course',
     })
 
+class FileViewSet(viewsets.ModelViewSet):
+    queryset = File.objects.all()
+    serializer_class = FileSerializer
+
+    # Additional actions if needed
+    @action(detail=True, methods=['get'])
+    def get_file_info(self, request, pk=None):
+        file = self.get_object()
+        serializer = FileSerializer(file)
+        return Response(serializer.data)
+
+    def perform_create(self, serializer):
+        serializer.save(uploaded_by=self.request.user)
+
 
 @login_required
 def deleteFile(request, pk):
     file = get_object_or_404(File, pk=pk)
     file.delete()
     return redirect('core:index')
+
+file_list = FileViewSet.as_view({'get': 'list'})
+file_detail = FileViewSet.as_view({'get': 'retrieve'})
+file_create = FileViewSet.as_view({'post': 'create'})
+file_update = FileViewSet.as_view({'put': 'update'})
+file_delete = FileViewSet.as_view({'delete': 'destroy'})
