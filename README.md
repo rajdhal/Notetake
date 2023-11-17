@@ -100,6 +100,7 @@ To run the application, you need to set up a `.env` file with a Django secret ke
 3. Browse and download documents uploaded by others.
 4. View PDF documents inline within the application.
 5. Utilize the RESTful API endpoints for programmatic interaction.
+6. Note: Only admin accounts can add or change the list of courses.
 
 ## Contributing
 
