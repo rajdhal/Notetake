@@ -102,6 +102,30 @@ To run the application, you need to set up a `.env` file with a Django secret ke
 5. Utilize the RESTful API endpoints for programmatic interaction.
 6. Note: Only admin accounts can add or change the list of courses.
 
+
+## API Endpoint
+
+Access the API at: [http://localhost:8000/api/files/](http://localhost:8000/api/files/)
+
+### API Capabilities
+
+The API supports the following operations:
+
+#### 1. List all Files
+
+- **Endpoint:** `/api/files/`
+- **HTTP Method:** GET
+- **Description:** Retrieve a list of all uploaded files for a specific course.
+
+#### 2. Upload a File
+
+- **Endpoint:** `/api/files/`
+- **HTTP Method:** POST
+- **Description:** Upload a new file to a specific course.
+
+Feel free to interact with the API using the provided endpoints!
+
+
 ## Contributing
 
 Contributions are welcome! Please follow these guidelines:
