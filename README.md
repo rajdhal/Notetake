@@ -48,6 +48,28 @@ Make sure you have the following installed:
    pip install -r requirements.txt
    ```
 
+### Environment Configuration
+
+To run the application, you need to set up a `.env` file with a Django secret key. Follow these steps:
+
+1. Create a new file named `.env` in the root of the project.
+
+2. Open the `.env` file in a text editor and add the following line:
+
+   ```plaintext
+   SECRET_KEY = your_django_secret_key
+   ```
+
+   Replace `your_django_secret_key` with a secure and unique secret key. You can generate one using:
+
+   ```bash
+   python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+   ```
+
+3. Save the `.env` file into the root folder.
+
+### Continue with Installation
+
 4. Apply migrations:
 
    ```bash
