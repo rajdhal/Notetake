@@ -13,9 +13,11 @@ Notetake is a Django-based web application that allows users to upload and share
 
 ## Features
 
-- User authentication: Users can create accounts and log in to the system.
-- Document upload: Users can upload class-specific documents.
-- Document download: Users can browse and download documents uploaded by others.
+- **User Authentication:** Users can create accounts and log in to the system.
+- **Document Upload:** Users can upload class-specific documents.
+- **Document Download:** Users can browse and download documents uploaded by others.
+- **Inline PDF Viewing:** View uploaded PDF documents directly within the application.
+- **RESTful API Endpoints:** Expose API endpoints for interacting with the application programmatically.
 
 ## Getting Started
 
@@ -74,6 +76,8 @@ Make sure you have the following installed:
 1. Log in or create an account.
 2. Upload class-specific documents.
 3. Browse and download documents uploaded by others.
+4. View PDF documents inline within the application.
+5. Utilize the RESTful API endpoints for programmatic interaction.
 
 ## Contributing
 
